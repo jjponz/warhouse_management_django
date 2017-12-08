@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'warehouse_management'
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# add test_runner reedgreendiscover jjpv
+TEST_RUNNER="redgreenunittest.django.runner.RedGreenDiscoverRunner"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
