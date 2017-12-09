@@ -22,4 +22,4 @@ class EditModelShould(TestCase):
         return result
 
     def __update_model (self, model):
-        model.property = "new value"
+        model.name = "new value"

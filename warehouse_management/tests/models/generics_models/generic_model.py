@@ -1,11 +1,22 @@
 class GenericModel():
     def __init__ (self):
-        self.__property = ""
+        self.__name = ""
+        self.__uuid = False
 
     @property
-    def property(self):
-        return self.__property
+    def name(self):
+        return self.__name
 
-    @property.setter
-    def property(self, value):
-        self.__property = value
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
+    @property
+    def uuid(self):
+        return self.__uuid
+
+
+    def set_uid(self, value):
+        self.__uuid = value
+
+
