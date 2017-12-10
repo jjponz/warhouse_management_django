@@ -14,7 +14,6 @@ class EditModelShould(TestCase):
 
         self.assertTrue(model_repository.is_called_for_save_with(model))
 
-
     # private
 
     def __init_model_repository_with (self, model):
