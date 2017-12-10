@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
     'warehouse_management'
 ]
 
@@ -121,3 +122,7 @@ TEST_RUNNER="redgreenunittest.django.runner.RedGreenDiscoverRunner"
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BOOTSTRAP4 = {
+    'theme_url': '/static/bootstrap/css/bootstrap.min.css',
+}
