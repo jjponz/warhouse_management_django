@@ -7,7 +7,7 @@ from warehouse_management.tests.infrastructure.freeze_time_provider import Freez
 
 class CreateModelShould(TestCase):
     def test_assign_id(self):
-        model_repository = GenericModelMemoryRepository.without_initial_model()
+        model_repository = GenericModelMemoryRepository.empty()
         model = GenericModel ()
         create_model = CreateModel(model_repository)
 
@@ -17,7 +17,7 @@ class CreateModelShould(TestCase):
 
     def test_assign_creation_date(self):
         time_provider = FreezeTimeProvider(date(2001, 1, 1))
-        model_repository = GenericModelMemoryRepository.without_initial_model()
+        model_repository = GenericModelMemoryRepository.empty()
         model = GenericModel ()
         create_model = CreateModel(model_repository)
         create_model.set_time_provider(time_provider)

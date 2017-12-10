@@ -7,7 +7,7 @@ class GenericModelMemoryRepository:
         self.__last_id_generated = None
 
     @classmethod
-    def without_initial_model (cls):
+    def empty(cls):
         return cls(False)
 
     def save(self, model):
