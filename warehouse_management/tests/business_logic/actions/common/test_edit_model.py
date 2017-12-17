@@ -1,7 +1,7 @@
 from django.test import TestCase
-from warehouse_management.actions import EditModel
-from warehouse_management.tests.models.generics_models.generic_model import GenericModel
-from warehouse_management.tests.infrastructure.generic_model_repository import GenericModelMemoryRepository
+from warehouse_management.business_logic.actions import EditModel
+from warehouse_management.tests.business_logic.models.generics_models.generic_model import GenericModel
+from warehouse_management.tests.business_logic.infrastructure.generic_model_repository import GenericModelMemoryRepository
 
 class EditModelShould(TestCase):
     def test_update_model (self):

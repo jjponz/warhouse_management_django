@@ -1,4 +1,4 @@
-from warehouse_management.models import UIDGenerator
+from warehouse_management.business_logic import UIDGenerator
 
 class GenericModelMemoryRepository:
     def __init__ (self, model):

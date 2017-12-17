@@ -1,4 +1,4 @@
-from warehouse_management.infrastructure.common.default_time_provider import DefaultTimeProvider
+from warehouse_management.business_logic.infrastructure.common.default_time_provider import DefaultTimeProvider
 
 class CreateModel():
 
