@@ -14,12 +14,12 @@ class TestSaveItemShould(TestCase):
 
         self.assertEqual(0, action_result.has_errors())
 
-#     def test_assign_id(self):
-        # item = ItemBuilder().build()
-        # item_memory_repository = ItemMemoryRepository()
-        # create_item = CreateItem(item_memory_repository)
+    def test_assign_id(self):
+        item = ItemBuilder().build()
+        item_memory_repository = ItemMemoryRepository()
+        save_item = SaveItem(item_memory_repository)
 
-        # create_item.do(item)
+        save_item.do(item)
 
-        # self.assertEqual(item_memory_repository.last_id_generated, item.uuid)
+        self.assertEqual(item_memory_repository.last_id_generated(), item.uuid)
 

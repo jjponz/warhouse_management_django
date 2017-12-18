@@ -1,6 +1,8 @@
+from warehouse_management.business_logic.models import Item
+
 class ItemBuilder():
     def __init__ (self):
-        pass
+        self.__item = Item()
 
     def build(self):
-        return None
+        return self.__item
