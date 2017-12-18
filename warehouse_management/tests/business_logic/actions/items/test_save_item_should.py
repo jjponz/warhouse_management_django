@@ -14,12 +14,21 @@ class TestSaveItemShould(TestCase):
 
         self.assertEqual(0, action_result.has_errors())
 
-    def test_assign_id(self):
+    def test_assign_uid_to_item_is_item_is_new(self):
         item = ItemBuilder().build()
         item_memory_repository = ItemMemoryRepository()
         save_item = SaveItem(item_memory_repository)
 
         save_item.do(item)
 
-        self.assertEqual(item_memory_repository.last_id_generated(), item.uuid)
+        self.assertEqual(item_memory_repository.last_id_generated(), item.uid)
 
+    def test_not_override_uid_to_item_if_this_already_have(self):
+        uid = "uid"
+        item = ItemBuilder().with_uid(uid).build()
+        item_memory_repository = ItemMemoryRepository()
+        save_item = SaveItem(item_memory_repository)
+
+        save_item.do(item)
+
+        self.assertEqual(uid, item.uid)

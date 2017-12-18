@@ -7,7 +7,7 @@ class ItemMemoryRepository:
     def last_id_generated(self):
         return self.__last_id_generated
 
-    def generate_uuid(self):
+    def generate_uid(self):
         self.__last_id_generated = UIDGenerator.generate()
         return self.__last_id_generated
 
