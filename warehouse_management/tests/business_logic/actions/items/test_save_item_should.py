@@ -12,7 +12,16 @@ class TestSaveItemShould(TestCase):
 
         action_result = save_item.do (item)
 
-        self.assertEqual(0, action_result.has_errors())
+        self.assertFalse(action_result.has_errors())
+
+    def test_retun_action_result_with_errors_if_item_has_not_name(self):
+        item = ItemBuilder().without_name().build()
+        item_memory_repository = ItemMemoryRepository()
+        save_item = SaveItem(item_memory_repository)
+
+        action_result = save_item.do(item)
+
+        self.assertTrue(action_result.has_errors())
 
     def test_assign_uid_to_item_is_item_is_new(self):
         item = ItemBuilder().build()

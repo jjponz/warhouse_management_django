@@ -3,4 +3,4 @@ class ActionResult:
         pass
 
     def has_errors(self):
-        return 0
+        return False

@@ -9,5 +9,10 @@ class ItemBuilder():
 
         return self
 
+    def without_name(self):
+        self.__item.name = ""
+
+        return self
+
     def build(self):
         return self.__item
