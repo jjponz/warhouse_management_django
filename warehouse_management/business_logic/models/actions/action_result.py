@@ -1,6 +1,17 @@
 class ActionResult:
+    @classmethod
+    def add_errors(cls, errors):
+        result = cls()
+        result.__add_errors(errors)
+        return result
+
     def __init__(self):
-        pass
+        self.__errors = []
 
     def has_errors(self):
-        return False
+        return len(self.__errors)
+
+    def __add_errors(self, errors):
+        self.__errors.extend(errors)
+
+
