@@ -12,8 +12,10 @@ class SaveItem:
         if not item_validator.validate (item):
             return ActionResult.create_with_errors(item_validator.errors)
 
-        save_model = SaveModel(self.__item_repository)
-        save_model.save (item)
-
+        self.__save(item)
 
         return ActionResult()
+
+    def __save(self, item):
+        save_model = SaveModel(self.__item_repository)
+        save_model.save (item)

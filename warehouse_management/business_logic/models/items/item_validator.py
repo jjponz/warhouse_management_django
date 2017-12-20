@@ -1,10 +1,18 @@
+from warehouse_management.business_logic.models.validations.validation_error import ValidationError
+
 class ItemValidator:
     def __init__(self):
-        pass
+        self.__errors = []
 
     def validate(self, item):
-        return item.name is not ""
+        if item.name is "":
+            self.__add_error (ValidationError("Nombre", "El nombre del item es requerido"))
+
+        return len(self.__errors) == 0
 
     @property
     def errors(self):
-        return ['some']
+        return self.__errors
+
+    def __add_error(self, error):
+        self.__errors.append(error)

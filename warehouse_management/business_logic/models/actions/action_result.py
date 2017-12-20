@@ -11,6 +11,10 @@ class ActionResult:
     def has_errors(self):
         return len(self.__errors)
 
+    @property
+    def errors(self):
+        return self.__errors
+
     def __add_errors(self, errors):
         self.__errors.extend(errors)
 
