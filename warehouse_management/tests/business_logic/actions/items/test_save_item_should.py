@@ -31,17 +31,25 @@ class TestSaveItemShould(TestCase):
 
         self.assertTrue(action_result.has_errors())
 
-    def test_return_error_that_cause_fail_action(self):
+    def test_return_unicity_errors(self):
+        item = ItemBuilder().with_name("item_name").build()
+        item_memory_repository = self.__init_repository_with(item)
+        save_item = SaveItem(item_memory_repository)
+
+        action_result = save_item.do(item)
+
+        self.assertEqual("Nombre", action_result.errors[0].property_name)
+        self.assertEqual("Ya existe un item con ese nombre.", action_result.errors[0].message_error)
+
+    def test_return_validation_errors(self):
         item = ItemBuilder().without_name().build()
         item_memory_repository = ItemMemoryRepository()
         save_item = SaveItem(item_memory_repository)
 
         action_result = save_item.do(item)
 
-        self.assertTrue(action_result.has_errors())
         self.assertEqual("Nombre", action_result.errors[0].property_name)
         self.assertEqual("El nombre del item es requerido", action_result.errors[0].message_error)
-
 
     def test_assign_uid_to_item_is_item_is_new(self):
         item = ItemBuilder().build()
