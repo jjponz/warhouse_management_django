@@ -40,3 +40,21 @@ class TestSaveItemShould(TestCase):
         save_item.do(item)
 
         self.assertEqual(uid, item.uid)
+
+    def test_add_item_to_repository_if_item_is_valid(self):
+        item = ItemBuilder().build()
+        item_memory_repository = ItemMemoryRepository()
+        save_item = SaveItem(item_memory_repository)
+
+        save_item.do(item)
+
+        self.assertEqual(item, item_memory_repository.get(item.uid))
+
+    def test_not_add_item_to_repository_if_item_is_not_valid(self):
+        item = ItemBuilder().without_name().build()
+        item_memory_repository = ItemMemoryRepository()
+        save_item = SaveItem(item_memory_repository)
+
+        save_item.do(item)
+
+        self.assertIsNone(item_memory_repository.get(item.uid))

@@ -1,6 +1,6 @@
 class ActionResult:
     @classmethod
-    def add_errors(cls, errors):
+    def create_with_errors(cls, errors):
         result = cls()
         result.__add_errors(errors)
         return result
