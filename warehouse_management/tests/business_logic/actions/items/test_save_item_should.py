@@ -22,7 +22,14 @@ class TestSaveItemShould(TestCase):
 
         self.assertTrue(action_result.has_errors())
 
+    def test_return_action_result_with_errors_if_item_name_exists_in_repository(self):
+        item = ItemBuilder().with_name("item_name").build()
+        item_memory_repository = self.__init_repository_with(item)
+        save_item = SaveItem(item_memory_repository)
 
+        action_result = save_item.do(item)
+
+        self.assertTrue(action_result.has_errors())
 
     def test_return_error_that_cause_fail_action(self):
         item = ItemBuilder().without_name().build()
@@ -31,6 +38,7 @@ class TestSaveItemShould(TestCase):
 
         action_result = save_item.do(item)
 
+        self.assertTrue(action_result.has_errors())
         self.assertEqual("Nombre", action_result.errors[0].property_name)
         self.assertEqual("El nombre del item es requerido", action_result.errors[0].message_error)
 
@@ -71,3 +79,9 @@ class TestSaveItemShould(TestCase):
         save_item.do(item)
 
         self.assertIsNone(item_memory_repository.get(item.uid))
+
+    def __init_repository_with(self, item):
+        result = ItemMemoryRepository()
+        result.save(item)
+
+        return result

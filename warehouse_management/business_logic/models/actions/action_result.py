@@ -9,7 +9,7 @@ class ActionResult:
         self.__errors = []
 
     def has_errors(self):
-        return len(self.__errors)
+        return len(self.__errors) > 0
 
     @property
     def errors(self):

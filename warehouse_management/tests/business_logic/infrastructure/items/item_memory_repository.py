@@ -18,3 +18,9 @@ class ItemMemoryRepository:
     def get(self, item_uid):
         return self.__item
 
+    def exists_name(self, item_name):
+        if self.__item is None:
+            return False
+
+        return item_name == self.__item.name
+

@@ -10,6 +10,11 @@ class ItemBuilder():
 
         return self
 
+    def with_name(self, name):
+        self.__item.name = name
+
+        return self
+
     def without_name(self):
         self.__item.name = ""
 
