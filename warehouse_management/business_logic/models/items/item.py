@@ -2,6 +2,7 @@ class Item:
     def __init__(self):
         self.__uid = None
         self.__name = ""
+        self.__notes = ""
 
     @property
     def name(self):
@@ -10,6 +11,14 @@ class Item:
     @name.setter
     def name(self, value):
         self.__name = value
+
+    @property
+    def notes(self):
+        return self.__notes
+
+    @notes.setter
+    def notes(self, value):
+        self.__notes = value
 
     @property
     def uid(self):
