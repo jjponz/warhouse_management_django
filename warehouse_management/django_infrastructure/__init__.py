@@ -1,0 +1,1 @@
+from warehouse_management.django_infrastructure.items.django_item_adapter import DjangoItemAdapter
