@@ -1,7 +1,7 @@
-from warehouse_management.business_logic.models.items.item import Item
 from warehouse_management.models import ItemMapper
 from warehouse_management.business_logic import UIDGenerator
 from warehouse_management.django_infrastructure import DjangoItemAdapter
+
 
 class DjangoItemRepository:
     def __init__(self):

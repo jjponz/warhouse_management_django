@@ -1,8 +1,7 @@
 from django.test import TestCase
 from warehouse_management.forms import ItemForm
 from warehouse_management.models import ItemMapper
-from warehouse_management.infrastructure2 import DjangoItemRepository
-from warehouse_management.django_infrastructure import DjangoItemAdapter
+from warehouse_management.django_infrastructure import DjangoItemAdapter, DjangoItemRepository
 from warehouse_management.business_logic.actions import SaveItem
 from warehouse_management.business_logic.models.actions.django_save_item_executor import DjangoSaveItemExecutor
 
