@@ -1,6 +1,6 @@
 from warehouse_management.models import ItemMapper
 from warehouse_management.business_logic import UIDGenerator
-from warehouse_management.django_infrastructure import DjangoItemAdapter
+from warehouse_management.django_infrastructure.items.django_item_adapter import DjangoItemAdapter
 
 
 class DjangoItemRepository:
@@ -17,3 +17,6 @@ class DjangoItemRepository:
         adapter = DjangoItemAdapter()
         django_item = adapter.to_django_item(item)
         django_item.save()
+
+    def count(self):
+        return ItemMapper.objects.all().count()
