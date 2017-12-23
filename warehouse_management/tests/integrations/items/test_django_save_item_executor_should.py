@@ -28,15 +28,3 @@ class TestDjangoSaveItemExecutorShould(TestCase):
 
         self.assertFalse(django_item_repository.exists_item_with_name(''))
         self.assertEqual(0, ItemMapper.objects.all().count())
-
-    def test_return_action_result_with_errors_if_item_name_exists_in_repository (self):
-        item_form = ItemForm(data={'name':'Juanjo', 'notes':'some note'})
-        django_item_repository = DjangoItemRepository()
-        save_item = SaveItem(django_item_repository)
-        django_adapter = DjangoItemAdapter()
-        django_save_item_executor = DjangoSaveItemExecutor(item_form, django_adapter, save_item)
-        django_save_item_executor.do()
-
-        action_result = django_save_item_executor.do()
-
-        self.assertTrue(action_result.has_errors())
