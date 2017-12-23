@@ -3,7 +3,7 @@ from warehouse_management.forms import ItemForm
 from warehouse_management.models import ItemMapper
 from warehouse_management.django_infrastructure import DjangoItemAdapter, DjangoItemRepository
 from warehouse_management.business_logic.actions import SaveItem
-from warehouse_management.business_logic.models.actions.django_save_item_executor import DjangoSaveItemExecutor
+from warehouse_management.business_logic import DjangoSaveItemExecutor
 
 class TestDjangoSaveItemExecutorShould(TestCase):
     def test_save_item_if_item_is_valid(self):
