@@ -43,7 +43,8 @@ class TestSaveItemShould(TestCase):
         self.assertEqual("Nombre", action_result.errors[0].property_name)
         self.assertEqual("Ya existe un item con ese nombre.", action_result.errors[0].message_error)
 
-    def test_update_model_if_exists_and_is_valid (self):
+
+    def test_return_action_result_witouth_errors_if_update_valid_item(self):
         item = ItemBuilder().with_name("item_name").build()
         item_memory_repository = self.__init_repository_with(item)
         save_item = SaveItem(item_memory_repository)
@@ -51,7 +52,17 @@ class TestSaveItemShould(TestCase):
         item.notes = "Upgrade notes"
         action_result = save_item.do(item)
 
-        self.assertEqual(item.notes, item_memory_repository.get(item_memory_repository.last_id_generated()).notes)
+        self.assertFalse(action_result.has_errors())
+
+    def test_update_model_if_exists_and_is_valid (self):
+        item = ItemBuilder().with_name("item_name").build()
+        item_memory_repository = self.__init_repository_with(item)
+        save_item = SaveItem(item_memory_repository)
+
+        item.notes = "Upgrade notes"
+        save_item.do(item)
+
+        self.assertEqual("Upgrade notes", item_memory_repository.get(item_memory_repository.last_id_generated()).notes)
 
     def test_return_validation_errors(self):
         item = ItemBuilder().without_name().build()
