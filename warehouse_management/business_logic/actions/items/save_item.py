@@ -8,7 +8,7 @@ class SaveItem:
         self.__item_repository = item_repository
 
     def do (self, item):
-        if self.__item_repository.exists_item_with_name(item.name):
+        if item.uid is None and self.__item_repository.exists_item_with_name(item.name):
            return self.__build_unicity_error()
 
         if self.__is_valid(item) is False:

@@ -23,23 +23,35 @@ class TestSaveItemShould(TestCase):
         self.assertTrue(action_result.has_errors())
 
     def test_return_action_result_with_errors_if_item_name_exists_in_repository(self):
-        item = ItemBuilder().with_name("item_name").build()
-        item_memory_repository = self.__init_repository_with(item)
+        existing_item = ItemBuilder().with_name("item_name").build()
+        item_memory_repository = self.__init_repository_with(existing_item)
         save_item = SaveItem(item_memory_repository)
+        new_item = ItemBuilder().with_name("item_name").build()
 
-        action_result = save_item.do(item)
+        action_result = save_item.do(new_item)
 
         self.assertTrue(action_result.has_errors())
 
-    def test_return_unicity_errors(self):
+    def test_return_unicity_errors_if_item_name_exists_in_repository(self):
+        existing_item = ItemBuilder().with_name("item_name").build()
+        item_memory_repository = self.__init_repository_with(existing_item)
+        save_item = SaveItem(item_memory_repository)
+        new_item = ItemBuilder().with_name("item_name").build()
+
+        action_result = save_item.do(new_item)
+
+        self.assertEqual("Nombre", action_result.errors[0].property_name)
+        self.assertEqual("Ya existe un item con ese nombre.", action_result.errors[0].message_error)
+
+    def test_update_model_if_exists_and_is_valid (self):
         item = ItemBuilder().with_name("item_name").build()
         item_memory_repository = self.__init_repository_with(item)
         save_item = SaveItem(item_memory_repository)
 
+        item.notes = "Upgrade notes"
         action_result = save_item.do(item)
 
-        self.assertEqual("Nombre", action_result.errors[0].property_name)
-        self.assertEqual("Ya existe un item con ese nombre.", action_result.errors[0].message_error)
+        self.assertEqual(item.notes, item_memory_repository.get(item_memory_repository.last_id_generated()).notes)
 
     def test_return_validation_errors(self):
         item = ItemBuilder().without_name().build()
@@ -90,6 +102,7 @@ class TestSaveItemShould(TestCase):
 
     def __init_repository_with(self, item):
         result = ItemMemoryRepository()
+        item.set_uid(result.generate_uid())
         result.save(item)
 
         return result
