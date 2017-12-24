@@ -22,28 +22,6 @@ class TestSaveItemShould(TestCase):
 
         self.assertTrue(action_result.has_errors())
 
-    def test_return_action_result_with_errors_if_item_name_exists_in_repository(self):
-        existing_item = ItemBuilder().with_name("item_name").build()
-        item_memory_repository = self.__init_repository_with(existing_item)
-        save_item = SaveItem(item_memory_repository)
-        new_item = ItemBuilder().with_name("item_name").build()
-
-        action_result = save_item.do(new_item)
-
-        self.assertTrue(action_result.has_errors())
-
-    def test_return_unicity_errors_if_item_name_exists_in_repository(self):
-        existing_item = ItemBuilder().with_name("item_name").build()
-        item_memory_repository = self.__init_repository_with(existing_item)
-        save_item = SaveItem(item_memory_repository)
-        new_item = ItemBuilder().with_name("item_name").build()
-
-        action_result = save_item.do(new_item)
-
-        self.assertEqual("Nombre", action_result.errors[0].property_name)
-        self.assertEqual("Ya existe un item con ese nombre.", action_result.errors[0].message_error)
-
-
     def test_return_action_result_witouth_errors_if_update_valid_item(self):
         item = ItemBuilder().with_name("item_name").build()
         item_memory_repository = self.__init_repository_with(item)
