@@ -1,5 +1,4 @@
 from django.test import TestCase
-from faker import Faker
 from warehouse_management.business_logic.actions import ItemFinder
 from warehouse_management.tests.business_logic.models.items.item_builder import ItemBuilder
 from warehouse_management.tests.business_logic.infrastructure.items.item_memory_repository import ItemMemoryRepository
@@ -24,16 +23,12 @@ class TestItemFinderShould(TestCase):
         self.assertEqual(1, len(finded_items))
 
     def __build_items(self, number_of_items):
-        items = [self.__build_item("Mesa", "Negra y grande")]
+        items = [ ItemBuilder().with_name("Mesa").with_notes("Negra y grande").with_generated_uid().build()]
 
-        faker = Faker()
         for _ in range(49):
-            items.append(self.__build_item(faker.name(), faker.text()))
+            items.append(ItemBuilder().with_generated_uid().build())
 
         return items
-
-    def __build_item(self, name, notes):
-        return ItemBuilder().with_name(name).with_notes(notes).with_generated_uid().build()
 
     def __init_repository_with(self, items):
         result = ItemMemoryRepository()

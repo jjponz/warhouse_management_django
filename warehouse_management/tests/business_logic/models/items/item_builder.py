@@ -1,10 +1,13 @@
 from warehouse_management.business_logic.models import Item
 from warehouse_management.business_logic import UIDGenerator
+from faker import Faker
 
 class ItemBuilder():
     def __init__ (self):
         self.__item = Item()
-        self.__item.name = "Name"
+        faker = Faker()
+        self.__item.name = faker.name()
+        self.__item.notes = faker.text()
 
     def with_uid(self, uid):
         self.__item.set_uid(uid)
