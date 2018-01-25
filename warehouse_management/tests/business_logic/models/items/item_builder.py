@@ -4,10 +4,7 @@ from faker import Faker
 
 class ItemBuilder():
     def __init__ (self):
-        self.__item = Item()
-        faker = Faker()
-        self.__item.name = faker.name()
-        self.__item.notes = faker.text()
+        self.__item = self.__build_item()
 
     def with_uid(self, uid):
         self.__item.set_uid(uid)
@@ -36,3 +33,24 @@ class ItemBuilder():
 
     def build(self):
         return self.__item
+
+    def build_random(self, number):
+        return self.__build_items(number)
+
+    def __build_items(self, number):
+        result = []
+        for item in range(1,number):
+            result.append(self.__build_item())
+
+        return result
+
+    def __build_item(self):
+        result = Item()
+        faker = Faker()
+        result.name = faker.name()
+        result.notes = faker.text()
+
+        return result
+
+
+

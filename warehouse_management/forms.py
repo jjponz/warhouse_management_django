@@ -9,5 +9,7 @@ class ItemForm(forms.ModelForm):
         model = ItemMapper
         fields = ('name', 'notes')
 
-
+class ItemFinderForm(forms.Form):
+    property = forms.CharField(required=False)
+    value = forms.CharField(required=False)
 

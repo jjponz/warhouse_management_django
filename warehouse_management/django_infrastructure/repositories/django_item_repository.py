@@ -18,5 +18,16 @@ class DjangoItemRepository:
         django_item = adapter.to_django_item(item)
         django_item.save()
 
+    def add_range(self, items):
+        for item in items:
+            self.save(item)
+
     def count(self):
         return ItemMapper.objects.all().count()
+
+    def get_by(self, property, value):
+        filter_to_apply = {
+            "{}__icontains".format(property) : value,
+        }
+
+        return ItemMapper.objects.filter(**filter_to_apply)

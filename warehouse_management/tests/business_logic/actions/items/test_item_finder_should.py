@@ -9,7 +9,7 @@ class TestItemFinderShould(TestCase):
         item_memory_repository = self.__init_repository_with(items)
         item_finder = ItemFinder(item_memory_repository)
 
-        finded_items = item_finder.find("name", "Mesa")
+        finded_items = item_finder.do("name", "Mesa")
 
         self.assertEqual(1, len(finded_items))
 
@@ -18,7 +18,7 @@ class TestItemFinderShould(TestCase):
         item_memory_repository = self.__init_repository_with(items)
         item_finder = ItemFinder(item_memory_repository)
 
-        finded_items = item_finder.find("notes", "Negra")
+        finded_items = item_finder.do("notes", "Negra")
 
         self.assertEqual(1, len(finded_items))
 
