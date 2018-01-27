@@ -7,12 +7,16 @@ from warehouse_management.django_infrastructure import DjangoItemFinderExecutor
 class TestDjangoItemFinderExecutorShould(TestCase):
     def test_find_items_by_name(self):
         self.__init_repository()
-        item_finder_form = ItemFinderForm(data={'property':'name', 'value':'Juanjo'})
-        django_item_finder_executor = DjangoItemFinderExecutor ()
+        response = self.client.get('/items/list', {'property':'name', 'value':'Juanjo'})
+        self.assertTemplateUsed(response, 'items/items_list.html')
 
-        finded_items = django_item_finder_executor.do(item_finder_form.data['property'], item_finder_form.data['value'])
+        # self.__init_repository()
+        # item_finder_form = ItemFinderForm(data={'property':'name', 'value':'Juanjo'})
+        # django_item_finder_executor = DjangoItemFinderExecutor ()
 
-        self.assertEqual(1, len(finded_items))
+        # finded_items = django_item_finder_executor.do(item_finder_form.data['property'], item_finder_form.data['value'])
+
+        # self.assertEqual(1, len(finded_items))
 
     def test_find_items_by_notes(self):
         self.__init_repository()
