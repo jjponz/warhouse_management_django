@@ -10,6 +10,6 @@ class ItemForm(forms.ModelForm):
         fields = ('name', 'notes')
 
 class ItemFinderForm(forms.Form):
-    property = forms.CharField(required=False)
+    property = forms.CharField(required=False, disabled=True)
     value = forms.CharField(required=False)
 
