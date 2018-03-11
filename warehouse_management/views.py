@@ -9,6 +9,6 @@ def items_list(request):
     if request.method == "POST":
         form = ItemFinderForm(request.POST)
         django_item_finder_executor = DjangoItemFinderExecutor()
-        finded_items = django_item_finder_executor.do('name', form['value'])
+        finded_items = django_item_finder_executor.do('name', form['value'].value())
 
     return render(request, 'items/items_list.html', {'form': form, 'finded_items' : finded_items})

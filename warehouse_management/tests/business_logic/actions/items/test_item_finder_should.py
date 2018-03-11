@@ -22,6 +22,15 @@ class TestItemFinderShould(TestCase):
 
         self.assertEqual(1, len(finded_items))
 
+    def test_return_not_items_if_not_has_value_to_search(self):
+        items = self.__build_items(50)
+        item_memory_repository = self.__init_repository_with(items)
+        item_finder = ItemFinder(item_memory_repository)
+
+        finded_items = item_finder.do("notes", "")
+
+        self.assertEqual(0, len(finded_items))
+
     def __build_items(self, number_of_items):
         items = [ ItemBuilder().with_name("Mesa").with_notes("Negra y grande").with_generated_uid().build()]
 

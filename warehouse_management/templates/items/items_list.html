@@ -61,10 +61,14 @@
             <div class="container-fluid">
                 <br>
                 <h1>Items</h1>
-                    <form method="POST" class="post-form">{% csrf_token %}
-                        {{ form.value }}
-                        <button type="submit" class="save btn btn-default">buscar</button>
-                   </form>
+                <form method="POST" class="post-form">{% csrf_token %}
+                    {{ form.value }}
+                    <button type="submit" class="save btn btn-default">buscar</button>
+                </form>
+                <br><br>
+                {% for item in finded_items %}
+                    {{ item.name }}<br>
+                {% endfor %}
                 <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
             </div>
 
