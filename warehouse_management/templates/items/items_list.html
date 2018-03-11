@@ -2,6 +2,11 @@
 
 {% block content %}
     <h1>Items</h1>
+    <ul class="actions-bar">
+        <li> <a href="#">Crear</a></li>
+        <li> <a href="#">Editar</a></li>
+    </ul>
+    <br><br><br><br>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.value }}
         <button type="submit" class="save btn btn-default">buscar</button>
