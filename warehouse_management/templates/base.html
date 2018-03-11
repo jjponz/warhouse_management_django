@@ -1,0 +1,70 @@
+{% load bootstrap4 %}
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/custom-simple-sidebar.css' %}"> 
+
+    <title>Warehouse Management</title>
+</head>
+
+<body>
+    <div id ="wrapper">
+    <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Menú
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Items</a>
+                </li>
+                <li>
+                    <a href="#">Otro</a>
+                </li>
+           </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+        <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
+            <div class="container-fluid">
+               {% block content %}
+               {% endblock %} 
+            </div>
+
+             
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+<!-- Bootstrap core JavaScript -->
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

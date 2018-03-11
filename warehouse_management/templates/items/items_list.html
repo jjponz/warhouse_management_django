@@ -1,95 +1,13 @@
-{% load bootstrap4 %}
-{% load staticfiles %}
+{% extends 'base.html' %}
 
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <!--<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">-->
-    <link rel="stylesheet" href="{% static 'bootstrap/css/custom-simple-sidebar.css' %}"> 
-
-    <title>Simple Sidebar - Start Bootstrap Template</title>
-</head>
-
-<body>
-
-    <div id ="wrapper">
-    <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-        <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Toggle Menu</a>
-            <div class="container-fluid">
-                <br>
-                <h1>Items</h1>
-                <form method="POST" class="post-form">{% csrf_token %}
-                    {{ form.value }}
-                    <button type="submit" class="save btn btn-default">buscar</button>
-                </form>
-                <br><br>
-                {% for item in finded_items %}
-                    {{ item.name }}<br>
-                {% endfor %}
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-            </div>
-
-             
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-
-<!-- Bootstrap core JavaScript -->
-    <script src="{% static 'jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-</body>
-
-</html>
+{% block content %}
+    <h1>Items</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.value }}
+        <button type="submit" class="save btn btn-default">buscar</button>
+    </form>
+    <br><br>
+    {% for item in finded_items %}
+        {{ item.name }}<br>
+    {% endfor %}
+{% endblock %}
