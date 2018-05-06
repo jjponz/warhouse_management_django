@@ -1,0 +1,2 @@
+class WarehouseMemoryRepository:
+    pass
