@@ -3,13 +3,15 @@ from warehouse_management.business_logic.models.warehouses.warehouse import Ware
 from warehouse_management.business_logic.actions.warehouses.save_warehouse import SaveWarehouse
 from warehouse_management.tests.business_logic.infrastructure.warehouses.warehouse_memory_repository import WarehouseMemoryRepository
 from warehouse_management.tests.business_logic.models.items.item_builder import ItemBuilder
+from warehouse_management.tests.business_logic.models.warehouses.warehouse_builder import WarehouseBuilder
 import mock
 
 
 class TestSaveWarehouseShould(TestCase):
     def test_return_action_result_with_errors_if_warehouse_has_not_name(self):
-        warehouse = Warehouse()
-        warehouse_memory_repository = WarehouseMemoryRepository()
+        warehouse_builder = WarehouseBuilder()
+        warehouse = warehouse_builder.without_name().build()
+        warehouse_memory_repository = mock.Mock()
         save_warehouse = SaveWarehouse(warehouse_memory_repository)
 
         action_result = save_warehouse.do(warehouse)
@@ -20,8 +22,8 @@ class TestSaveWarehouseShould(TestCase):
                          action_result.errors[0].message_error)
 
     def test_save_warehouse_if_have_not_errors(self):
-        warehouse = Warehouse()
-        warehouse.name = "Some name"
+        warehouse_builder = WarehouseBuilder()
+        warehouse = warehouse_builder.build()
         warehouse_memory_repository = mock.Mock()
         save_warehouse = SaveWarehouse(warehouse_memory_repository)
 
@@ -31,14 +33,12 @@ class TestSaveWarehouseShould(TestCase):
 
     def test_return_action_result_with_errors_if_warehouse_has_bad_warehouse_item(
             self):
+        warehouse_builder = WarehouseBuilder()
         warehouse_memory_repository = mock.Mock()
         save_warehouse = SaveWarehouse(warehouse_memory_repository)
-        warehouse = Warehouse()
-        warehouse.name = "Name"
         item = ItemBuilder().build()
-        warehouse.add_item(item)
-        warehouse.discount_quantity(item)
-        warehouse.discount_quantity(item)
+        warehouse = warehouse_builder.add_item_with_negative_quantity(
+            item).build()
 
         action_result = save_warehouse.do(warehouse)
 
@@ -50,13 +50,11 @@ class TestSaveWarehouseShould(TestCase):
 
     def test_return_action_result_with_errors_if_warehouse_has_repeated_warehouse_items(
             self):
+        warehouse_builder = WarehouseBuilder()
         warehouse_memory_repository = mock.Mock()
         save_warehouse = SaveWarehouse(warehouse_memory_repository)
-        warehouse = Warehouse()
-        warehouse.name = "Name"
-        item = ItemBuilder().with_name("Item").build()
-        warehouse.add_item(item)
-        warehouse.add_item(item)
+        item = ItemBuilder().with_name("name").build()
+        warehouse = warehouse_builder.add_item(item).add_item(item).build()
 
         action_result = save_warehouse.do(warehouse)
 
@@ -66,12 +64,11 @@ class TestSaveWarehouseShould(TestCase):
                          action_result.errors[0].message_error)
 
     def test_save_warehouse_if_have_all_items_with_possitive_quantities(self):
+        warehouse_builder = WarehouseBuilder()
         warehouse_memory_repository = mock.Mock()
         save_warehouse = SaveWarehouse(warehouse_memory_repository)
-        warehouse = Warehouse()
-        warehouse.name = "Name"
-        item = ItemBuilder().build()
-        warehouse.add_item(item)
+        item = ItemBuilder().with_name("name").build()
+        warehouse = warehouse_builder.add_item(item).build()
 
         save_warehouse.do(warehouse)
 
