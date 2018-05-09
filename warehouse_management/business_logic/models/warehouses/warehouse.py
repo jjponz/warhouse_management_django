@@ -5,7 +5,7 @@ class Warehouse():
     def __init__(self):
         self.__uid = None
         self.__name = ""
-        self.__items = []
+        self._items = []
 
     @property
     def name(self):
@@ -21,7 +21,7 @@ class Warehouse():
 
     @property
     def items(self):
-        return tuple(self.__items)
+        return tuple(self._items)
 
     def set_uid(self, value):
         self.__uid = value
@@ -29,11 +29,32 @@ class Warehouse():
     def has_uid(self):
         return self.__uid is not None
 
-    def add_item(self, item):
-        self.__items.append(WarehouseItem(item.name, 1))
+    def add_item(self, item_name):
+        existing_item = self.__find_item(item_name)
+        if not existing_item:
+            self._items.append(WarehouseItem(item_name, 1))
+            return
 
-    def discount_quantity(self, item):
-        item_to_discount = list(
-            filter(lambda _item: _item.name == item.name, self.__items))
+        existing_item.add_quantity()
 
-        item_to_discount[0].discount_quantity()
+    def discount_quantity(self, item_name):
+        item_to_discount = self.__find_item(item_name)
+
+        item_to_discount.discount_quantity()
+
+    def contains(self, item_name):
+        item = self.__find_item(item_name)
+
+        return item is not None
+
+    def item_quantity(self, item_name):
+        item = self.__find_item(item_name)
+        return item.quantity
+
+    def __find_item(self, item_name):
+        result = list(filter(lambda item: item.name == item_name, self._items))
+
+        if not result:
+            return None
+
+        return result[0]

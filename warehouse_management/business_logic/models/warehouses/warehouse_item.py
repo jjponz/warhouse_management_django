@@ -11,5 +11,8 @@ class WarehouseItem:
     def quantity(self):
         return self.__quantity
 
+    def add_quantity(self):
+        self.__quantity = self.__quantity + 1
+
     def discount_quantity(self):
         self.__quantity = self.__quantity - 1
