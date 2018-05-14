@@ -7,6 +7,21 @@ class Warehouse():
         self.__name = ""
         self._items = []
 
+    @classmethod
+    def create(cls, uid, name, items):
+        result = cls()
+        result.__uid = uid
+        result.__name = name
+        print("Estoy en el puto create de warehouse:   ")
+        for item in items:
+            print("Itero   " + item.name)
+            result._items.append(item)
+
+        print("====")
+        print(len(result.items))
+
+        return result
+
     @property
     def name(self):
         return self.__name
@@ -22,6 +37,10 @@ class Warehouse():
     @property
     def items(self):
         return tuple(self._items)
+
+    @property
+    def items_count(self):
+        return len(self._items)
 
     def set_uid(self, value):
         self.__uid = value
