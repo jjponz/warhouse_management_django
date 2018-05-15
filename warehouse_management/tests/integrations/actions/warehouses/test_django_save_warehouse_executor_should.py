@@ -77,15 +77,6 @@ class TestDjangoSaveWarehouseExecutorShould(TestCase):
         warehouse = django_warehouse_repository.get('Some_uid')
         self.assertIsNone(warehouse)
 
-    def test_performance(self):
-        warehouse = WarehouseBuilder().with_id().with_generated_items(
-            3).build()
-        django_warehouse_repository = DjangoWarehouseRepository()
-
-        django_warehouse_repository.save(warehouse)
-
-        self.assertIsNotNone(warehouse.uid)
-
     def __buildExpectedWarehouseItems(self):
         return [
             WarehouseItem('Item2', 5),
