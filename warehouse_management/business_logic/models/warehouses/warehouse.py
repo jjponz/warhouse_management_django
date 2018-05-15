@@ -12,13 +12,8 @@ class Warehouse():
         result = cls()
         result.__uid = uid
         result.__name = name
-        print("Estoy en el puto create de warehouse:   ")
         for item in items:
-            print("Itero   " + item.name)
             result._items.append(item)
-
-        print("====")
-        print(len(result.items))
 
         return result
 

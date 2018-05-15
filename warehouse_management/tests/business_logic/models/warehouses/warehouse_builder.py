@@ -18,6 +18,11 @@ class WarehouseBuilder:
 
         return self
 
+    def with_generated_items(self, number):
+        self.__add_generated_items(number)
+
+        return self
+
     def add_item_with_negative_quantity(self, item):
         self.__warehouse.add_item(item.name)
         self.__warehouse.discount_quantity(item.name)
@@ -38,3 +43,8 @@ class WarehouseBuilder:
         result.name = faker.name()
 
         return result
+
+    def __add_generated_items(self, number):
+        faker = Faker()
+        for item in range(1, number):
+            self.__warehouse._items.append(WarehouseItem(faker.name, 2))

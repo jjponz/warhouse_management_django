@@ -8,8 +8,8 @@ class WarehouseItemSerializer(serializers.Serializer):
 
     def to_domain_object(self):
         self.is_valid()
-        name = self.data.get('name', None)
-        quantity = self.data.get('quantity', None)
+        name = self.validated_data['name']
+        quantity = self.validated_data['quantity']
 
         return WarehouseItem(name, quantity)
 
@@ -26,10 +26,7 @@ class WarehouseSerializer(serializers.Serializer):
 
         items = []
         for item in self.validated_data['warehouse_items']:
-            print("llego a entrar aquí?======")
-            print("hoooola: " + item['name'])
             items.append(WarehouseItem(item['name'], item['quantity']))
 
         result = Warehouse.create(uid, name, items)
-        print(result.items)
         return result

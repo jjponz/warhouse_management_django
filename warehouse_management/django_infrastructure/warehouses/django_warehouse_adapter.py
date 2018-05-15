@@ -30,8 +30,6 @@ class DjangoWarehouseAdapter:
             warehouse_item = WarehouseItemMapper()
             warehouse_item.name = item.name
             warehouse_item.quantity = item.quantity
-            print("Esto imprime algo??? " + warehouse_item.name)
             WarehouseMapper.save(django_warehouse)
             WarehouseItemMapper.save(warehouse_item)
-            print("Ya lo he salvado")
             django_warehouse.items.add(warehouse_item)

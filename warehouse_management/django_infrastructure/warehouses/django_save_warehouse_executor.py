@@ -12,7 +12,5 @@ class DjangoSaveWarehouseExecutor:
     def do(self):
         warehouse_serializer = WarehouseSerializer(data=self.__data)
         warehouse = warehouse_serializer.to_domain_object()
-        print("En el do")
-        print(len(warehouse.items))
 
         return self.__action.do(warehouse)

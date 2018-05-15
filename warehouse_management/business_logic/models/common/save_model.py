@@ -4,6 +4,6 @@ class SaveModel():
 
     def save(self, model):
         if not model.has_uid():
-            model.set_uid (self.__model_repository.generate_uid())
+            model.set_uid(self.__model_repository.generate_uid())
 
         self.__model_repository.save(model)
