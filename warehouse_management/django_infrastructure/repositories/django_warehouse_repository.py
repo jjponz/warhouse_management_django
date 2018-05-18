@@ -12,10 +12,6 @@ class DjangoWarehouseRepository:
         self.__last_generated_uid = UIDGenerator.generate()
         return self.__last_generated_uid
 
-    @property
-    def last_warehouse(self):
-        return WarehouseMapper.objects.all()[0]
-
     def get(self, uid):
         try:
             warehouse = WarehouseMapper.objects.get(uid=uid)

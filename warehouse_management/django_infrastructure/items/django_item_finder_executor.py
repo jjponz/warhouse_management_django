@@ -2,9 +2,9 @@ from warehouse_management.django_infrastructure.items.django_item_adapter import
 from warehouse_management.django_infrastructure import DjangoItemRepository
 from warehouse_management.business_logic.actions import ItemFinder
 
+
 class DjangoItemFinderExecutor:
     def __init__(self):
-        self.__adapter = DjangoItemAdapter()
         self.__action = ItemFinder(DjangoItemRepository())
 
     def do(self, property, value):
